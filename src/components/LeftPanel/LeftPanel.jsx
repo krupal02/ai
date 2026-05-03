@@ -2,11 +2,51 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export default function LeftPanel() {
-  const { flight, location, userMode, toggleNavigation } = useApp();
+  const {
+    flight, location, userMode, toggleNavigation,
+    userProfile, resetProfile,
+    setShowFoodFinder, setShowSecurityInfo,
+  } = useApp();
   const isFirstTime = userMode === 'first-time';
+
+  const frequencyLabel = {
+    first_time: '🎫 First-Time Flyer',
+    occasional: '✈️ Occasional Traveler',
+    frequent: '💼 Frequent Flyer',
+  };
+
+  const dietLabel = {
+    veg: '🥬 Vegetarian', non_veg: '🍗 Non-Veg', both: '🍽️ All',
+    vegan: '🌱 Vegan', jain: '🙏 Jain'
+  };
 
   return (
     <aside className="left-panel" role="complementary" aria-label="Flight dashboard">
+      {/* User Profile Card */}
+      {userProfile && (
+        <div className="panel-card profile-card">
+          <div className="card-title">👤 Your Profile</div>
+          <div className="profile-header">
+            <div className="profile-avatar">
+              {userProfile.full_name?.charAt(0)?.toUpperCase() || '?'}
+            </div>
+            <div className="profile-info">
+              <div className="profile-name">{userProfile.full_name}</div>
+              <div className="profile-badge">
+                {frequencyLabel[userProfile.travel_frequency] || '✈️ Traveler'}
+              </div>
+            </div>
+          </div>
+          <div className="profile-details">
+            {userProfile.pnr && <div className="profile-detail"><span>PNR</span><span className="detail-val">{userProfile.pnr}</span></div>}
+            {userProfile.flight_number && <div className="profile-detail"><span>Flight</span><span className="detail-val">{userProfile.flight_number}</span></div>}
+            <div className="profile-detail"><span>Diet</span><span className="detail-val">{dietLabel[userProfile.dietary_preference] || 'All'}</span></div>
+            <div className="profile-detail"><span>Age</span><span className="detail-val">{userProfile.age_group}</span></div>
+          </div>
+          <button className="profile-edit-btn" onClick={resetProfile}>✏️ Edit Profile</button>
+        </div>
+      )}
+
       {/* Status Card */}
       <div className="panel-card">
         <div className="card-title">📊 Your Status</div>
@@ -14,7 +54,7 @@ export default function LeftPanel() {
         <div className="status-location">📍 {location.terminal}, {location.area}</div>
         <div className="status-time">Updated just now</div>
         {isFirstTime && (
-          <div style={{ fontSize: '.8rem', color: '#6C757D', marginTop: 8, padding: '8px', background: '#F1F8F4', borderRadius: 6 }}>
+          <div style={{ fontSize: '.8rem', color: 'var(--text-sec)', marginTop: 8, padding: '8px', background: 'rgba(52,211,153,.08)', borderRadius: 6, border: '1px solid rgba(52,211,153,.15)' }}>
             💡 This shows your current progress. Green means you're on schedule!
           </div>
         )}
@@ -85,11 +125,11 @@ export default function LeftPanel() {
           <button className="quick-action-btn" onClick={toggleNavigation} aria-label="Navigate to gate">
             <span className="icon">🗺️</span> Navigate
           </button>
-          <button className="quick-action-btn" aria-label="Find food nearby">
+          <button className="quick-action-btn" onClick={() => setShowFoodFinder(true)} aria-label="Find food nearby">
             <span className="icon">🍽️</span> Food
           </button>
-          <button className="quick-action-btn" aria-label="Baggage rules">
-            <span className="icon">🧳</span> Baggage
+          <button className="quick-action-btn" onClick={() => setShowSecurityInfo(true)} aria-label="Security info">
+            <span className="icon">🛂</span> Security
           </button>
           <button className="quick-action-btn" aria-label="Find restrooms">
             <span className="icon">🚻</span> Restrooms

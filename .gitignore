@@ -7,3 +7,6 @@ __pycache__/
 .DS_Store
 chroma_db/
 Data/export.geojson
+Data/aeroguide.db
+*.txt
+*.db

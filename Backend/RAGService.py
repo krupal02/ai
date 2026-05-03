@@ -1,15 +1,16 @@
 import json
 import os
-from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+import re
+
+class Document:
+    def __init__(self, page_content, metadata):
+        self.page_content = page_content
+        self.metadata = metadata
 
 class RAGService:
-    def __init__(self, data_path="Data/airport_knowledge.json", persist_directory="Data/chroma_db"):
+    def __init__(self, data_path="Data/airport_knowledge.json"):
         self.data_path = data_path
-        self.persist_directory = persist_directory
-        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        self.vector_store = None
+        self.documents = []
         self.initialize_vector_store()
 
     def _parse_json_dynamically(self, data, parent_key=""):
@@ -34,22 +35,37 @@ class RAGService:
         if not os.path.exists(self.data_path):
             raise FileNotFoundError(f"Knowledge file not found at {self.data_path}")
             
+        print("Loading local knowledge base...")
         with open(self.data_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             
-        documents = self._parse_json_dynamically(data)
-        
-        self.vector_store = Chroma.from_documents(
-            documents=documents,
-            embedding=self.embeddings,
-            persist_directory=self.persist_directory
-        )
+        self.documents = self._parse_json_dynamically(data)
 
     def retrieve_context(self, query, k=5):
-        if not self.vector_store:
+        if not self.documents:
             return ""
-        results = self.vector_store.similarity_search(query, k=k)
-        context = "\n".join([doc.page_content for doc in results])
+            
+        # Simple Keyword Matching
+        query_words = set(re.findall(r'\w+', query.lower()))
+        if not query_words:
+            return ""
+            
+        scored_docs = []
+        for doc in self.documents:
+            doc_words = set(re.findall(r'\w+', doc.page_content.lower()))
+            score = len(query_words.intersection(doc_words))
+            
+            # Boost score if the query words appear as an exact substring
+            if any(qw in doc.page_content.lower() for qw in query_words if len(qw) > 3):
+                score += 2
+                
+            if score > 0:
+                scored_docs.append((score, doc))
+                
+        scored_docs.sort(key=lambda x: x[0], reverse=True)
+        top_docs = [doc for score, doc in scored_docs[:k]]
+        
+        context = "\n".join([doc.page_content for doc in top_docs])
         return context
 
 # For testing

@@ -1,0 +1,104 @@
+{
+  "airports": {
+    "DEL": {
+      "name": "Indira Gandhi International Airport",
+      "domestic_security": {
+        "procedure_overview": "Standard 2-tier security check at all terminals",
+        "steps": [
+          {"step": 1, "title": "Document Check", "description": "Show boarding pass and government-issued photo ID at entry gate", "time": "2 min"},
+          {"step": 2, "title": "Baggage X-Ray", "description": "Place cabin bags on conveyor belt for X-ray scanning. Remove laptops and place separately.", "time": "3 min"},
+          {"step": 3, "title": "Personal Frisking", "description": "Walk through metal detector. Random pat-down may follow.", "time": "2 min"},
+          {"step": 4, "title": "Gate Security", "description": "Secondary hand baggage X-ray at boarding gate for select flights", "time": "2 min"}
+        ],
+        "estimated_time": "15-25 minutes",
+        "peak_hours": ["06:00-09:00", "17:00-20:00"],
+        "prohibited_items": [
+          {"item": "Sharp objects", "examples": "Scissors, knives, razor blades, box cutters", "icon": "✂️"},
+          {"item": "Lighters", "examples": "Only 1 lighter allowed in pocket, not in bag", "icon": "🔥"},
+          {"item": "Liquids over 100ml", "examples": "Water bottles, shampoo, perfume. Buy inside after security.", "icon": "💧"},
+          {"item": "Power banks over 20,000 mAh", "examples": "Must be in cabin baggage, not checked", "icon": "🔋"},
+          {"item": "E-cigarettes in checked bag", "examples": "Must carry in hand luggage only", "icon": "🚬"},
+          {"item": "Flammable items", "examples": "Spray paint, lighter fluid, fireworks", "icon": "🧨"},
+          {"item": "Tools", "examples": "Screwdrivers over 6cm, wrenches, pliers", "icon": "🔧"}
+        ],
+        "allowed_with_restrictions": [
+          {"item": "Laptop/Electronics", "rule": "Must be removed from bag and screened separately", "icon": "💻"},
+          {"item": "Medicines", "rule": "Carry prescription; liquid medicines allowed in reasonable quantity with doctor's note", "icon": "💊"},
+          {"item": "Baby food/milk", "rule": "Allowed for infants; may be tested at checkpoint", "icon": "🍼"},
+          {"item": "Duty-free liquor", "rule": "Sealed in STEB bag with receipt. Only for international transfers.", "icon": "🍷"}
+        ]
+      },
+      "international_security": {
+        "additional_steps": [
+          {"step": 5, "title": "Immigration Check", "description": "Passport and visa verification at immigration counter", "time": "5-10 min"},
+          {"step": 6, "title": "Customs Declaration", "description": "Declare items exceeding duty-free allowance. Use Green channel if nothing to declare.", "time": "2 min"},
+          {"step": 7, "title": "Random Screening", "description": "Additional random pat-down or bag search may be conducted", "time": "3 min"}
+        ],
+        "estimated_time": "30-45 minutes",
+        "liquid_rule": "3-1-1 rule: Each container max 100ml, all containers in one 1-litre clear resealable bag",
+        "currency_limit": "₹25,000 cash for domestic. USD 5,000 or equivalent for international without declaration.",
+        "prohibited_items_strict": [
+          {"item": "Meat/dairy products", "examples": "Fresh meat, cheese (varies by destination)", "icon": "🥩"},
+          {"item": "Fresh fruits and vegetables", "examples": "Most fresh produce banned on international flights", "icon": "🍎"},
+          {"item": "Soil or plants", "examples": "Seeds, soil, live plants require phytosanitary certificate", "icon": "🌱"},
+          {"item": "Weapons", "examples": "Even decorative swords, replica guns are banned", "icon": "⚔️"},
+          {"item": "Counterfeit goods", "examples": "Fake branded items can be confiscated", "icon": "🚫"}
+        ]
+      }
+    }
+  },
+  "country_specific_warnings": {
+    "UAE": [
+      {"severity": "critical", "warning": "No pork products allowed in any form"},
+      {"severity": "critical", "warning": "Prescription drugs (especially painkillers, sleeping pills) need a medical certificate from a UAE-accredited doctor"},
+      {"severity": "critical", "warning": "E-cigarettes and vaping devices are COMPLETELY BANNED. Possession can lead to arrest and fines up to AED 200,000"},
+      {"severity": "high", "warning": "Alcohol can only be purchased at licensed shops; public intoxication is a criminal offense"},
+      {"severity": "medium", "warning": "Photography of government buildings, airports, military installations is prohibited"}
+    ],
+    "USA": [
+      {"severity": "high", "warning": "Remove shoes for TSA screening"},
+      {"severity": "high", "warning": "All electronics larger than a phone must be placed in separate bin"},
+      {"severity": "medium", "warning": "TSA PreCheck available for expedited screening with registration"},
+      {"severity": "high", "warning": "CBP declaration form required for all arrivals. Declare food items."},
+      {"severity": "critical", "warning": "Absolutely no agricultural products (fruits, meats, plants) without declaration"}
+    ],
+    "Singapore": [
+      {"severity": "critical", "warning": "Chewing gum is PROHIBITED. Import and sale banned with heavy fines"},
+      {"severity": "critical", "warning": "Drug trafficking carries MANDATORY DEATH PENALTY. Zero tolerance policy."},
+      {"severity": "high", "warning": "Duty-free liquor: max 1 litre spirits, 1 litre wine, 1 litre beer"},
+      {"severity": "medium", "warning": "E-cigarettes and vaping devices are banned"},
+      {"severity": "medium", "warning": "Cigarettes must have 'SDPC' marking or face heavy fines"}
+    ],
+    "UK": [
+      {"severity": "high", "warning": "No food of animal origin from outside the EU/UK allowed"},
+      {"severity": "medium", "warning": "Duty-free: 200 cigarettes, 1L spirits, 4L wine"},
+      {"severity": "medium", "warning": "Must declare cash over £10,000"},
+      {"severity": "low", "warning": "Marmite and other dense liquids may be flagged at security"}
+    ]
+  },
+  "penalties": {
+    "India": [
+      {"violation": "Carrying prohibited sharp object", "consequence": "Item confiscated, possible FIR filed", "severity": "high"},
+      {"violation": "Undeclared currency over ₹25,000 (domestic)", "consequence": "Currency seized + fine up to 3x the undeclared amount", "severity": "critical"},
+      {"violation": "Fake/forged documents", "consequence": "Arrest, imprisonment up to 3 years under IPC Section 420", "severity": "critical"},
+      {"violation": "Carrying contraband", "consequence": "Arrest under NDPS Act, minimum 10 years imprisonment for drugs", "severity": "critical"},
+      {"violation": "Unruly behavior on aircraft", "consequence": "Ban from airline, fine up to ₹15 lakh under DGCA rules", "severity": "high"}
+    ],
+    "International": [
+      {"violation": "Drug possession (UAE/Singapore)", "consequence": "DEATH PENALTY or life imprisonment", "severity": "critical"},
+      {"violation": "Undeclared goods (customs fraud)", "consequence": "Heavy fines, confiscation, possible jail time", "severity": "high"},
+      {"violation": "Overstaying visa", "consequence": "Deportation, ban on re-entry for 1-10 years", "severity": "high"},
+      {"violation": "Wildlife trafficking", "consequence": "Up to 5 years imprisonment + heavy fines under CITES", "severity": "critical"}
+    ]
+  },
+  "tips": [
+    "Arrive 2 hours early for domestic flights, 3 hours for international",
+    "Wear slip-on shoes to speed up screening",
+    "Keep electronics and liquids in an easily accessible pocket of your bag",
+    "When in doubt, ALWAYS declare items at customs — honesty prevents penalties",
+    "Download your airline app for a digital boarding pass backup",
+    "Take a photo of your checked baggage contents for insurance purposes",
+    "Keep medicines in original packaging with prescription labels visible",
+    "Check your destination country's customs website 24 hours before travel"
+  ]
+}

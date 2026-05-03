@@ -86,7 +86,7 @@ function MessageBubble({ msg, feedbackGiven, onFeedback, isFirstTime }) {
 
 export default function ChatInterface() {
   const { messages, isTyping, feedbackGiven, sendMessage, giveFeedback } = useChat();
-  const { flight, userMode, coordinates } = useApp();
+  const { flight, userMode, coordinates, userProfile } = useApp();
   const [input, setInput] = useState('');
   const [micActive, setMicActive] = useState(false);
   const messagesEndRef = useRef(null);
@@ -98,7 +98,7 @@ export default function ChatInterface() {
 
   const handleSend = () => {
     if (!input.trim()) return;
-    sendMessage(input, userMode, coordinates);
+    sendMessage(input, userMode, coordinates, userProfile);
     setInput('');
   };
 
@@ -110,7 +110,7 @@ export default function ChatInterface() {
   };
 
   const handlePrompt = (text) => {
-    sendMessage(text, userMode, coordinates);
+    sendMessage(text, userMode, coordinates, userProfile);
   };
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;

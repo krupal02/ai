@@ -9,6 +9,39 @@ export function AppProvider({ children }) {
     return localStorage.getItem('ac-userMode') || USER_MODES.FIRST_TIME;
   });
 
+  // ── User Profile (from onboarding) ────────────────────
+  const [userProfile, setUserProfile] = useState(() => {
+    try {
+      const saved = localStorage.getItem('aeroguide_user_profile');
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  });
+
+  const [onboardingComplete, setOnboardingComplete] = useState(() => {
+    return !!localStorage.getItem('aeroguide_user_profile');
+  });
+
+  const completeOnboarding = useCallback((profile) => {
+    setUserProfile(profile);
+    setOnboardingComplete(true);
+    // Sync travel frequency to existing userMode system
+    const modeMap = { first_time: USER_MODES.FIRST_TIME, occasional: USER_MODES.FIRST_TIME, frequent: USER_MODES.FREQUENT };
+    const mode = modeMap[profile.travel_frequency] || USER_MODES.FIRST_TIME;
+    setUserMode(mode);
+    localStorage.setItem('ac-userMode', mode);
+  }, []);
+
+  const resetProfile = useCallback(() => {
+    localStorage.removeItem('aeroguide_user_profile');
+    setUserProfile(null);
+    setOnboardingComplete(false);
+  }, []);
+
+  // ── Feature modals ─────────────────────────────────────
+  const [showFoodFinder, setShowFoodFinder] = useState(false);
+  const [showSecurityInfo, setShowSecurityInfo] = useState(false);
+
+  // ── Existing state ─────────────────────────────────────
   const [airport, setAirport] = useState(AIRPORTS[0]);
   const [language, setLanguage] = useState(LANGUAGES[0]);
   const [flight, setFlight] = useState(flightData);
@@ -18,7 +51,7 @@ export function AppProvider({ children }) {
   const [tips, setTips] = useState(quickTips);
   const [weather, setWeather] = useState(destinationWeather);
   const [showNavigation, setShowNavigation] = useState(false);
-  const [mobilePanel, setMobilePanel] = useState(null); // 'left', 'right', or null
+  const [mobilePanel, setMobilePanel] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
 
   React.useEffect(() => {
@@ -73,6 +106,17 @@ export function AppProvider({ children }) {
         showNavigation,
         mobilePanel,
         coordinates,
+        // New profile state
+        userProfile,
+        onboardingComplete,
+        completeOnboarding,
+        resetProfile,
+        // Feature modals
+        showFoodFinder,
+        setShowFoodFinder,
+        showSecurityInfo,
+        setShowSecurityInfo,
+        // Existing actions
         updateUserMode,
         updateAirport,
         updateLanguage,
