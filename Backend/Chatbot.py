@@ -11,10 +11,13 @@ class ChatBot:
         """Build a context-aware system prompt based on user profile data."""
         
         base = (
-            "You are AeroGuide, an AI Airport Companion. You are helpful, polite, and concise. "
-            "Use the provided context to answer the user's query. If you don't know the answer, say you don't know. "
-            "CRITICAL RULE: No matter what language the user speaks (e.g. Hindi, Hinglish), "
-            "you MUST always reply in pure, correct ENGLISH. Do not use Hindi text."
+            "You are AeroGuide, an AI Airport Companion at Indira Gandhi International Airport (DEL), New Delhi. "
+            "You are helpful, polite, and concise. "
+            "ALWAYS use the Context Information below to answer. Quote specific details like gate numbers, "
+            "coordinates, restaurant names, prices, security steps, shop items, and SKUs from the context. "
+            "If the context contains the answer, use it. If not, say you don't have that information. "
+            "Always provide time estimates and walking distances when discussing locations. "
+            "Assume average walking speed of 80 meters per minute inside the terminal."
         )
 
         # Parse profile string for personalization
@@ -58,8 +61,7 @@ class ChatBot:
             )
 
         # Dietary awareness
-        if 'diet:' in profile_lower or 'dietary' in profile_lower:
-            # Extract dietary info
+        if 'diet:' in profile_lower or 'dietary' in profile_lower or 'veg' in profile_lower:
             if 'veg' in profile_lower and 'non' not in profile_lower:
                 base += "\n\nThe user is VEGETARIAN. Only recommend vegetarian food options."
             elif 'vegan' in profile_lower:
@@ -77,26 +79,23 @@ class ChatBot:
 
         # Inject context
         base += f"\n\nUser Profile/Status: {user_profile}"
-        base += f"\n\nExact Passenger Location: {location_context}"
-        base += f"\n\nContext Information:\n{context}"
+        base += f"\n\nPassenger Location: {location_context}"
+        base += f"\n\n--- Context Information ---\n{context}\n--- End Context ---"
 
         return base
 
     def get_response(self, query: str, user_profile: str, latitude: float = None, longitude: float = None) -> str:
         # Retrieve relevant context from RAG
-        print("DEBUG: Calling rag_service.retrieve_context...")
         try:
             context = self.rag_service.retrieve_context(query)
-            print("DEBUG: Context retrieved.")
         except Exception as e:
-            print(f"DEBUG: RAG failed: {e}")
+            print(f"RAG error: {e}")
             context = ""
         
-        # Mock Location Mapping
-        location_context = "Unknown Location"
+        # Location Mapping
+        location_context = "Terminal 2, Near Check-in Area"
         if latitude and longitude:
-            # We are mocking the indoor mapping for the hackathon
-            location_context = "Terminal 2, Near Security Checkpoint (Coordinates tracking active)"
+            location_context = f"Coordinates: ({latitude}, {longitude}) - Terminal 2 Area"
 
         system_prompt = self._build_system_prompt(user_profile, location_context, context)
         
@@ -106,7 +105,6 @@ class ChatBot:
         ]
         
         try:
-            print("DEBUG: Sending request to Ollama...")
             payload = {
                 "model": self.model_name,
                 "messages": messages,
@@ -114,23 +112,23 @@ class ChatBot:
                 "options": {
                     "temperature": 0.7,
                     "top_p": 0.9,
-                    "num_predict": 256
+                    "num_predict": 512
                 }
             }
             
-            print("DEBUG: Request sent, waiting for response...")
-            response = requests.post("http://localhost:11434/api/chat", json=payload, timeout=5)
-            print(f"DEBUG: Ollama response status: {response.status_code}")
+            response = requests.post("http://localhost:11434/api/chat", json=payload, timeout=60)
             response.raise_for_status()
             
             data = response.json()
             return data["message"]["content"].strip()
         except requests.exceptions.ConnectionError:
-            return "Error: Could not connect to local Ollama. Is Ollama running?"
+            return "I'm sorry, the AI engine is starting up. Please try again in a few seconds."
+        except requests.exceptions.Timeout:
+            return "The AI is taking longer than expected. Please try your question again."
         except Exception as e:
-            return f"Error communicating with LLM: {str(e)}"
+            return f"I encountered an error: {str(e)}. Please try again."
 
 # For testing
 if __name__ == "__main__":
     bot = ChatBot()
-    print(bot.get_response("Where is starbucks?", "Name: Raj, Travel Type: first_time, Age Group: 18-30, Diet: veg"))
+    print(bot.get_response("Where is Starbucks?", "Name: Raj, Travel Type: first_time, Age Group: 18-30, Diet: veg"))

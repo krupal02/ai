@@ -4,14 +4,23 @@ export default function SecurityInfo({ onClose }) {
   const [activeTab, setActiveTab] = useState('procedure');
   const [rules, setRules] = useState(null);
   const [flightType, setFlightType] = useState('domestic');
+  const [airportCode, setAirportCode] = useState('DEL');
   const [destination, setDestination] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const AIRPORTS = [
+    { code: 'DEL', label: '🛫 Delhi (DEL)' },
+    { code: 'BOM', label: '🛫 Mumbai (BOM)' },
+    { code: 'BLR', label: '🛫 Bangalore (BLR)' },
+  ];
 
   const DESTINATIONS = [
     { code: 'UAE', label: '🇦🇪 UAE / Dubai' },
     { code: 'USA', label: '🇺🇸 USA' },
     { code: 'Singapore', label: '🇸🇬 Singapore' },
     { code: 'UK', label: '🇬🇧 United Kingdom' },
+    { code: 'Japan', label: '🇯🇵 Japan' },
+    { code: 'Australia', label: '🇦🇺 Australia' },
   ];
 
   const tabs = [
@@ -25,7 +34,7 @@ export default function SecurityInfo({ onClose }) {
   const fetchRules = async () => {
     setLoading(true);
     try {
-      const url = `http://localhost:8000/api/security/rules?airport_code=DEL&flight_type=${flightType}&destination=${destination}`;
+      const url = `http://localhost:8000/api/security/rules?airport_code=${airportCode}&flight_type=${flightType}&destination=${destination}`;
       const res = await fetch(url);
       const data = await res.json();
       setRules(data);
@@ -36,7 +45,7 @@ export default function SecurityInfo({ onClose }) {
     }
   };
 
-  useEffect(() => { fetchRules(); }, [flightType, destination]);
+  useEffect(() => { fetchRules(); }, [flightType, destination, airportCode]);
 
   const getSeverityClass = (sev) => {
     if (sev === 'critical') return 'severity-critical';
@@ -51,6 +60,14 @@ export default function SecurityInfo({ onClose }) {
         <div className="security-modal-header">
           <h2>🛂 Security Information</h2>
           <button className="modal-close" onClick={onClose}>✕</button>
+        </div>
+
+        {/* Airport Selector */}
+        <div className="security-type-toggle" style={{marginBottom: '4px'}}>
+          {AIRPORTS.map(a => (
+            <button key={a.code} className={`type-btn ${airportCode === a.code ? 'active' : ''}`}
+              onClick={() => setAirportCode(a.code)}>{a.label}</button>
+          ))}
         </div>
 
         {/* Flight type toggle */}

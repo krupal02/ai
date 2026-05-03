@@ -26,6 +26,7 @@ tts = TTS()
 # ── Load static data ──────────────────────────────────
 FOOD_DB_PATH = os.path.join("Data", "food_database.json")
 SECURITY_DB_PATH = os.path.join("Data", "security_procedures.json")
+SHOPPING_DB_PATH = os.path.join("Data", "shopping_database.json")
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -33,6 +34,7 @@ def load_json(path):
 
 food_data = load_json(FOOD_DB_PATH) if os.path.exists(FOOD_DB_PATH) else {"restaurants": [], "cuisine_categories": {}}
 security_data = load_json(SECURITY_DB_PATH) if os.path.exists(SECURITY_DB_PATH) else {}
+shopping_data = load_json(SHOPPING_DB_PATH) if os.path.exists(SHOPPING_DB_PATH) else {"shops": []}
 
 # ── Pydantic Models ────────────────────────────────────
 class ChatRequest(BaseModel):
@@ -249,6 +251,27 @@ async def check_items(items: List[str], destination: str = ""):
                 break
 
     return {"compliant": len(flagged) == 0, "flagged_items": flagged, "total_checked": len(items)}
+
+# ── Shopping / Duty-Free Endpoints ─────────────────────
+@app.get("/api/shopping")
+async def get_shops(shop_type: str = ""):
+    shops = shopping_data.get("shops", [])
+    if shop_type:
+        shops = [s for s in shops if s.get("type", "").lower() == shop_type.lower()]
+    return {"shops": shops, "total": len(shops)}
+
+@app.get("/api/shopping/offers")
+async def get_all_offers():
+    all_offers = []
+    for shop in shopping_data.get("shops", []):
+        for offer in shop.get("offers", []):
+            all_offers.append({
+                "shop_name": shop.get("name"),
+                "shop_type": shop.get("type"),
+                "terminal": shop.get("terminal"),
+                **offer
+            })
+    return {"offers": all_offers, "total": len(all_offers)}
 
 # ── Static files ───────────────────────────────────────
 if os.path.exists("dist"):

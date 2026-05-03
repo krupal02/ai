@@ -1,0 +1,130 @@
+{
+  "shops": [
+    {
+      "id": "shop_001",
+      "name": "Delhi Duty Free - Liquor & Tobacco",
+      "type": "duty_free",
+      "terminal": "T3",
+      "zone": "International_Departures_PostSecurity",
+      "gate_proximity": ["27", "28", "29", "30"],
+      "open_hours": "24/7",
+      "items": [
+        {"name": "Johnnie Walker Black Label 1L", "price": 2800, "category": "Whiskey", "sku": "JW-BLK-1L"},
+        {"name": "Absolut Vodka 1L", "price": 1600, "category": "Vodka", "sku": "ABS-VDK-1L"},
+        {"name": "Hendrick's Gin 700ml", "price": 3200, "category": "Gin", "sku": "HND-GIN-700"},
+        {"name": "Moet & Chandon Brut 750ml", "price": 4500, "category": "Champagne", "sku": "MOE-BRT-750"},
+        {"name": "Marlboro Gold Pack", "price": 450, "category": "Cigarettes", "sku": "MRL-GLD-PK"},
+        {"name": "Glenfiddich 12 Year 700ml", "price": 3500, "category": "Scotch", "sku": "GLF-12Y-700"},
+        {"name": "Jack Daniel's Tennessee 1L", "price": 2400, "category": "Whiskey", "sku": "JD-TEN-1L"},
+        {"name": "Grey Goose Vodka 750ml", "price": 3800, "category": "Vodka", "sku": "GG-VDK-750"}
+      ],
+      "offers": [
+        {"description": "Buy 2 Get 10% OFF on all Scotch Whiskey", "validity": "Valid till May 31, 2026", "badge": "10% OFF"},
+        {"description": "Free Tasting: Glenfiddich sampling at counter 3", "validity": "Daily 10AM-8PM", "badge": "FREE TASTING"}
+      ]
+    },
+    {
+      "id": "shop_002",
+      "name": "Delhi Duty Free - Perfumes & Cosmetics",
+      "type": "duty_free",
+      "terminal": "T3",
+      "zone": "International_Departures_PostSecurity",
+      "gate_proximity": ["30", "31", "32"],
+      "open_hours": "24/7",
+      "items": [
+        {"name": "Chanel No. 5 EDP 100ml", "price": 8500, "category": "Perfume", "sku": "CHL-N5-100"},
+        {"name": "Dior Sauvage EDT 100ml", "price": 7200, "category": "Perfume", "sku": "DIO-SAV-100"},
+        {"name": "MAC Lipstick Ruby Woo", "price": 1800, "category": "Cosmetics", "sku": "MAC-RBW-LS"},
+        {"name": "Estée Lauder Advanced Night Repair 50ml", "price": 5500, "category": "Skincare", "sku": "EL-ANR-50"},
+        {"name": "Tom Ford Black Orchid 50ml", "price": 9800, "category": "Perfume", "sku": "TF-BOR-50"},
+        {"name": "Clinique Moisture Surge 75ml", "price": 2800, "category": "Skincare", "sku": "CLQ-MS-75"},
+        {"name": "Giorgio Armani Si EDP 100ml", "price": 7800, "category": "Perfume", "sku": "GA-SI-100"},
+        {"name": "Kiehl's Ultra Facial Cream 50ml", "price": 2200, "category": "Skincare", "sku": "KHL-UFC-50"}
+      ],
+      "offers": [
+        {"description": "20% OFF on all perfumes above ₹5000", "validity": "Valid this week only", "badge": "20% OFF"},
+        {"description": "Free gift pouch with any MAC purchase", "validity": "While stocks last", "badge": "FREE GIFT"}
+      ]
+    },
+    {
+      "id": "shop_003",
+      "name": "WHSmith",
+      "type": "books_stationery",
+      "terminal": "T3",
+      "zone": "Departures_PostSecurity",
+      "gate_proximity": ["5", "6", "7"],
+      "open_hours": "05:00-23:00",
+      "items": [
+        {"name": "Bestseller Fiction Novel", "price": 399, "category": "Books", "sku": "WHS-FIC-001"},
+        {"name": "Travel Neck Pillow", "price": 699, "category": "Travel Accessories", "sku": "WHS-NP-001"},
+        {"name": "Noise Cancelling Earbuds", "price": 2499, "category": "Electronics", "sku": "WHS-NCE-001"},
+        {"name": "Water Bottle 500ml", "price": 50, "category": "Beverages", "sku": "WHS-WB-500"},
+        {"name": "Indian Snack Pack Combo", "price": 250, "category": "Snacks", "sku": "WHS-SNK-001"},
+        {"name": "Universal Travel Adapter", "price": 599, "category": "Electronics", "sku": "WHS-UTA-001"},
+        {"name": "Sunscreen SPF 50 (100ml)", "price": 350, "category": "Personal Care", "sku": "WHS-SS-50"}
+      ],
+      "offers": [
+        {"description": "Buy 2 books, Get 1 Free", "validity": "Ongoing", "badge": "B2G1"}
+      ]
+    },
+    {
+      "id": "shop_004",
+      "name": "Electronics Hub",
+      "type": "electronics",
+      "terminal": "T3",
+      "zone": "Departures_PostSecurity",
+      "gate_proximity": ["9", "10", "11"],
+      "open_hours": "06:00-23:00",
+      "items": [
+        {"name": "Apple AirPods Pro 2", "price": 24900, "category": "Audio", "sku": "EH-APP-AP2"},
+        {"name": "Samsung 10000mAh Power Bank", "price": 1299, "category": "Power Bank", "sku": "EH-SAM-PB10"},
+        {"name": "JBL Flip 6 Speaker", "price": 9999, "category": "Speakers", "sku": "EH-JBL-FL6"},
+        {"name": "USB-C Fast Charging Cable", "price": 499, "category": "Cables", "sku": "EH-USC-FC"},
+        {"name": "Kindle Paperwhite 2024", "price": 13999, "category": "E-Reader", "sku": "EH-KND-PW24"},
+        {"name": "Boat Rockerz 450 Headphones", "price": 1499, "category": "Audio", "sku": "EH-BOT-R450"}
+      ],
+      "offers": [
+        {"description": "Flat ₹500 OFF on purchases above ₹5000", "validity": "Valid till May 15, 2026", "badge": "₹500 OFF"},
+        {"description": "Free screen guard with any phone purchase", "validity": "Ongoing", "badge": "FREE GUARD"}
+      ]
+    },
+    {
+      "id": "shop_005",
+      "name": "Indian Handicrafts Emporium",
+      "type": "souvenirs",
+      "terminal": "T3",
+      "zone": "International_Departures_PostSecurity",
+      "gate_proximity": ["33", "34", "35"],
+      "open_hours": "07:00-22:00",
+      "items": [
+        {"name": "Pashmina Shawl (Handwoven)", "price": 4500, "category": "Textiles", "sku": "IHE-PSH-001"},
+        {"name": "Sandalwood Elephant Figurine", "price": 1200, "category": "Decor", "sku": "IHE-SEF-001"},
+        {"name": "Rajasthani Miniature Painting", "price": 2500, "category": "Art", "sku": "IHE-RMP-001"},
+        {"name": "Darjeeling Tea Gift Box (250g)", "price": 800, "category": "Food Gifts", "sku": "IHE-DTG-250"},
+        {"name": "Brass Ganesh Idol", "price": 1500, "category": "Decor", "sku": "IHE-BGI-001"},
+        {"name": "Indian Spice Box Set", "price": 650, "category": "Food Gifts", "sku": "IHE-SBS-001"}
+      ],
+      "offers": [
+        {"description": "15% OFF on purchases above ₹3000", "validity": "Ongoing", "badge": "15% OFF"}
+      ]
+    },
+    {
+      "id": "shop_006",
+      "name": "Swarovski",
+      "type": "luxury",
+      "terminal": "T3",
+      "zone": "International_Departures_PostSecurity",
+      "gate_proximity": ["27", "28"],
+      "open_hours": "08:00-22:00",
+      "items": [
+        {"name": "Swarovski Tennis Bracelet", "price": 12500, "category": "Jewelry", "sku": "SWR-TB-001"},
+        {"name": "Swarovski Crystal Pen", "price": 4500, "category": "Accessories", "sku": "SWR-CP-001"},
+        {"name": "Swarovski Swan Necklace", "price": 8900, "category": "Jewelry", "sku": "SWR-SN-001"},
+        {"name": "Swarovski Iconic Swan Earrings", "price": 5500, "category": "Jewelry", "sku": "SWR-ISE-001"}
+      ],
+      "offers": [
+        {"description": "Complimentary gift wrapping on all purchases", "validity": "Ongoing", "badge": "FREE WRAP"}
+      ]
+    }
+  ]
+}

@@ -45,6 +45,77 @@
           {"item": "Counterfeit goods", "examples": "Fake branded items can be confiscated", "icon": "🚫"}
         ]
       }
+    },
+    "BOM": {
+      "name": "Chhatrapati Shivaji Maharaj International Airport",
+      "domestic_security": {
+        "procedure_overview": "Standard CISF security check at Terminal 1 and Terminal 2",
+        "steps": [
+          {"step": 1, "title": "Entry Gate Check", "description": "Show printed/digital boarding pass and valid photo ID (Aadhaar, Passport, DL)", "time": "2 min"},
+          {"step": 2, "title": "Baggage Screening", "description": "All cabin bags go through X-ray. Remove power banks, laptops, and large electronics.", "time": "4 min"},
+          {"step": 3, "title": "Metal Detector & Frisking", "description": "Walk through DFMD gate. CISF personnel conduct pat-down search.", "time": "3 min"},
+          {"step": 4, "title": "Boarding Gate Re-check", "description": "Random re-screening of hand baggage at boarding gate", "time": "2 min"}
+        ],
+        "estimated_time": "20-30 minutes",
+        "peak_hours": ["06:00-10:00", "18:00-21:00"],
+        "prohibited_items": [
+          {"item": "Sharp objects", "examples": "Scissors, knives, razor blades, nail cutters with blade", "icon": "✂️"},
+          {"item": "Lighters & matches", "examples": "Max 1 lighter in person, none in checked bag", "icon": "🔥"},
+          {"item": "Liquids over 100ml", "examples": "All liquids must be under 100ml in a clear bag", "icon": "💧"},
+          {"item": "Power banks in checked bag", "examples": "Must be in cabin baggage only; max 20,000mAh", "icon": "🔋"},
+          {"item": "Firecrackers/Explosives", "examples": "All types of crackers, flares, and explosive materials", "icon": "🧨"},
+          {"item": "Sporting equipment", "examples": "Cricket bats, hockey sticks must be checked in", "icon": "🏏"}
+        ],
+        "allowed_with_restrictions": [
+          {"item": "Laptop/Tablet", "rule": "Must be removed and screened separately", "icon": "💻"},
+          {"item": "Medicines", "rule": "Carry original prescription; liquids need doctor's note", "icon": "💊"},
+          {"item": "Baby items", "rule": "Baby food/milk allowed for infants traveling with you", "icon": "🍼"}
+        ]
+      },
+      "international_security": {
+        "additional_steps": [
+          {"step": 5, "title": "Immigration", "description": "Passport and visa check at immigration counter. Keep boarding pass ready.", "time": "5-15 min"},
+          {"step": 6, "title": "Customs", "description": "Green channel: nothing to declare. Red channel: goods exceeding ₹50,000 duty-free limit.", "time": "3 min"}
+        ],
+        "estimated_time": "35-50 minutes",
+        "liquid_rule": "3-1-1 rule applies. One clear resealable bag per person.",
+        "currency_limit": "₹25,000 cash for domestic. USD 5,000 for international without RBI declaration."
+      }
+    },
+    "BLR": {
+      "name": "Kempegowda International Airport",
+      "domestic_security": {
+        "procedure_overview": "Modern security setup with automated tray retrieval system",
+        "steps": [
+          {"step": 1, "title": "E-Gate / Document Check", "description": "Scan DigiYatra face ID or show boarding pass with photo ID", "time": "1 min"},
+          {"step": 2, "title": "Smart Baggage Screening", "description": "Place bags in automated tray. Laptops can stay inside in newer CT scanners.", "time": "3 min"},
+          {"step": 3, "title": "Body Scanner", "description": "Walk through millimeter wave body scanner (no pat-down needed in most cases)", "time": "1 min"},
+          {"step": 4, "title": "Gate Check", "description": "Quick ID verification at boarding gate", "time": "1 min"}
+        ],
+        "estimated_time": "10-15 minutes",
+        "peak_hours": ["05:30-08:30", "17:00-20:00"],
+        "prohibited_items": [
+          {"item": "Sharp objects", "examples": "Knives, scissors, blades of any kind", "icon": "✂️"},
+          {"item": "Liquids over 100ml", "examples": "Must follow 3-1-1 rule", "icon": "💧"},
+          {"item": "Power banks in checked bag", "examples": "Only in cabin baggage, max 20,000mAh", "icon": "🔋"},
+          {"item": "Self-defense items", "examples": "Pepper spray, tasers, stun guns", "icon": "🛡️"},
+          {"item": "Flammable materials", "examples": "Lighter fluid, aerosol cans over 100ml", "icon": "🧨"}
+        ],
+        "allowed_with_restrictions": [
+          {"item": "Laptop", "rule": "May stay in bag with new CT scanners; follow staff instructions", "icon": "💻"},
+          {"item": "Medicines", "rule": "Carry prescription for controlled substances", "icon": "💊"},
+          {"item": "Duty-free purchases", "rule": "Must be in sealed STEB bags with receipts", "icon": "🛍️"}
+        ]
+      },
+      "international_security": {
+        "additional_steps": [
+          {"step": 5, "title": "Immigration", "description": "Automated e-gates available for Indian passport holders", "time": "3-5 min"},
+          {"step": 6, "title": "Customs", "description": "Declare items exceeding duty-free allowance", "time": "2 min"}
+        ],
+        "estimated_time": "20-30 minutes",
+        "liquid_rule": "3-1-1 rule applies",
+        "currency_limit": "₹25,000 domestic. USD 5,000 international without declaration."
+      }
     }
   },
   "country_specific_warnings": {
@@ -74,6 +145,18 @@
       {"severity": "medium", "warning": "Duty-free: 200 cigarettes, 1L spirits, 4L wine"},
       {"severity": "medium", "warning": "Must declare cash over £10,000"},
       {"severity": "low", "warning": "Marmite and other dense liquids may be flagged at security"}
+    ],
+    "Japan": [
+      {"severity": "critical", "warning": "Strict drug laws - even trace amounts of marijuana can result in imprisonment"},
+      {"severity": "high", "warning": "Some over-the-counter medicines (pseudoephedrine, codeine) are banned"},
+      {"severity": "medium", "warning": "Meat products require quarantine inspection certificate"},
+      {"severity": "medium", "warning": "Duty-free: 3 bottles of alcohol (760ml each), 200 cigarettes"}
+    ],
+    "Australia": [
+      {"severity": "critical", "warning": "Extremely strict biosecurity. All food, plant, and animal products MUST be declared"},
+      {"severity": "high", "warning": "Failure to declare food items can result in fines up to AUD 630,000"},
+      {"severity": "high", "warning": "Wooden items and souvenirs may be inspected for pests"},
+      {"severity": "medium", "warning": "Duty-free: 2.25L alcohol, 25 cigarettes per person"}
     ]
   },
   "penalties": {
@@ -99,6 +182,8 @@
     "Download your airline app for a digital boarding pass backup",
     "Take a photo of your checked baggage contents for insurance purposes",
     "Keep medicines in original packaging with prescription labels visible",
-    "Check your destination country's customs website 24 hours before travel"
+    "Check your destination country's customs website 24 hours before travel",
+    "Use DigiYatra at BLR and select DEL terminals for faster processing",
+    "Power banks MUST be in cabin baggage - never put them in checked luggage"
   ]
 }
